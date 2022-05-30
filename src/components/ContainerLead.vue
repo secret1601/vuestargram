@@ -6,7 +6,7 @@
         
         <!-- 필터선택페이지 -->
         <div v-if="step == 1">
-            <div class="upload-image" :style="`background-image: url(${이미지})`"></div>
+            <div :class="choiceFilter" class=" upload-image" :style="`background-image: url(${이미지})`"></div>
             <div class="filters">
                 <Filter :filterList="filterList" :이미지="이미지" v-for="filterList in filters" :key="filterList">
                     <span>{{filterList}}</span>
@@ -16,7 +16,7 @@
         
         <!-- 글작성페이지 -->
         <div v-if="step == 2">
-            <div v-if="step == 2" class="upload-image" :style="`background-image: url(${이미지})`"></div>
+            <div  :class="choiceFilter" v-if="step == 2" class="upload-image" :style="`background-image: url(${이미지})`"></div>
             <div v-if="step == 2" class="write">
                 <textarea @input="$emit('write',$event.target.value)" class="write-box">write!</textarea>
             </div>
@@ -35,6 +35,7 @@ export default {
             filters : [ "aden", "_1977", "brannan", "brooklyn", "clarendon", "earlybird", "gingham", "hudson", 
                         "inkwell", "kelvin", "lark", "lofi", "maven", "mayfair", "moon", "nashville", "perpetua", 
                         "reyes", "rise", "slumber", "stinson", "toaster", "valencia", "walden", "willow", "xpro2"],
+            choiceFilter : '',
         }
     },
     
@@ -45,8 +46,14 @@ export default {
     props : {
         InstaData : Array,
         step: Number,
-        이미지: String
+        이미지: String,
+        i: Number
     },
+    mounted(){
+        this.emitter.on('filterName', (item) => {
+            this.choiceFilter = item;
+        });
+    }
 }
 </script>
 

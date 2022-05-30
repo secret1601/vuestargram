@@ -4,9 +4,9 @@
             <div class="profile" :style="{backgroundImage : `url(${InstaData.userImage})`}"></div>
             <span class="profile-name">{{InstaData.name}}</span>
         </div>
-        <div class="post-body" :style="{ backgroundImage : `url(${InstaData.postImage})`}"></div>
+        <div @click="$store.commit('likeAdd')" class="post-body" :style="{ backgroundImage : `url(${InstaData.postImage})`}"></div>
         <div class="post-content">
-            <p>{{InstaData.likes}} Likes</p>
+            <p>{{$store.state.likes}} Likes</p>
             <p><strong>{{InstaData.name}}</strong> {{InstaData.content}}</p>
             <p class="date">{{InstaData.date}}</p>
         </div>
@@ -17,9 +17,10 @@
 
     export default {
         props : {
-            InstaData : Array
+            InstaData : Array,
         }
     }
+
 </script>
 
 <style>

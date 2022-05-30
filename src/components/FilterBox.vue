@@ -1,5 +1,5 @@
 <template>
-    <div :class="filterList" class="filter-item" :style="`background-image: url(${이미지})`">
+    <div @click="fire" :class="filterList" class="filter-item" :style="`background-image: url(${이미지})`">
         <slot></slot>
     </div>
 </template>
@@ -7,6 +7,11 @@
 <script>
 export default {
     name : 'filterbox',
+    methods: {
+        fire(){
+            this.emitter.emit('filterName', this.filterList);
+        }
+    },
     data(){
         return{
             msg: 'hey11111111111111'
